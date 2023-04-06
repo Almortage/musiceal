@@ -51,7 +51,7 @@ async def play_commnd(
 ):
     if not await is_served_user(message.from_user.id):
         await message.reply_text(
-            text="😢 عزيزي انت غير موثق في بيانات cr .\n☔ من فضلك استخدم /verify لتوثيق نفسك في بيانات افاتار.",
+            text="😢 عزيزي انت غير موثق في بيانات rio .\n☔ من فضلك استخدم /verify لتوثيق نفسك في بيانات ريو.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
