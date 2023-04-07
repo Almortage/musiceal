@@ -10,7 +10,6 @@ from pytgcalls.exceptions import NoActiveGroupCall
 import config
 from config import BANNED_USERS, lyrical
 from strings import get_command
-from AnonX.plugins.amust import Amustj
 from AnonX import (Apple, Resso, SoundCloud, Spotify, Telegram,
                         YouTube, app)                        
 from AnonX.core.call import Anon
@@ -26,7 +25,6 @@ from AnonX.utils.inline.play import (livestream_markup,
 from AnonX.utils.database import is_served_user
 from AnonX.utils.inline.playlist import botplaylist_markup
 from AnonX.utils.logger import play_logs
-from AnonX.utils.loggerr import play_logs2
 from AnonX.utils.stream.stream import stream
 
 # Command
