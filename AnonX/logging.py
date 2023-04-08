@@ -1,23 +1,39 @@
-import logging
-from logging.handlers import RotatingFileHandler
-
-from config import LOG_FILE_NAME
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
-    datefmt="%d-%b-%y %H:%M:%S",
-    handlers=[
-        RotatingFileHandler(
-            LOG_FILE_NAME, maxBytes=5000000, backupCount=10
-        ),
-        logging.StreamHandler(),
-    ],
-)
-
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
-logging.getLogger("pytgcalls").setLevel(logging.ERROR)
+from config import LOG, LOG_GROUP_ID, MUSIC_BOT_NAME
+from AnonX import app
+from AnonX.utils.database import is_on_off
 
 
-def LOGGER(name: str) -> logging.Logger:
-    return logging.getLogger(name)
+async def play_logs(message, streamtype):
+    if await is_on_off(LOG):
+        if message.chat.username:
+            chatusername = f"@{message.chat.username}"
+        else:
+            chatusername = "ᴩʀɪᴠᴀᴛᴇ ᴄʜᴀᴛ"
+        logger_text = f"""
+**━━━━━━━━━━━━━━━**
+****◍ [⌞ѕᴏụʀᴄᴇ ᴀʟᴍᴏʀᴛᴀɢᴇʟ ⌯ ˹🎧˼⁩ ⌝****
+**━━━━━━━━━━━━━━━**
+**🌹️ اسم المجموعة : >** {message.chat.title} [`{message.chat.id}`]
+**━━━━━━━━━━━━━━━**
+**🥀 اسم المستخدم : ›** {message.from_user.mention}
+**━━━━━━━━━━━━━━━**
+**🌸 يوزر المستخدم : ›** @{message.from_user.username}
+**━━━━━━━━━━━━━━━**
+**🌷 ايدي المستخدم  : ›** `{message.from_user.id}`
+**━━━━━━━━━━━━━━━**
+**🌿 رابط الجروب: >** {chatusername}
+**━━━━━━━━━━━━━━━**
+**🌻 المطلوب:** {message.text}
+**━━━━━━━━━━━━━━━**
+**💐 نوع التشغيل:** {streamtype}
+**━━━━━━━━━━━━━━━**"""
+        if message.chat.id != LOG_GROUP_ID:
+            try:
+                await app.send_message(
+                    LOG_GROUP_ID,
+                    text=logger_text,
+                    disable_web_page_preview=True,
+                )
+            except:
+                pass
+        return
